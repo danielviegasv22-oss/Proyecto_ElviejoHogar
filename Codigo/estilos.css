@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+
+    /* Fondo exterior */
+    background-color: #fdf1e8;
+
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Rectángulo principal */
+.contenedor {
+    width: 400px;
+    padding: 40px;
+
+    background-color: #fae3d1;
+
+    border-radius: 20px;
+
+    box-shadow: 0 10px 30px rgba(135, 68, 13, 0.15);
+}
+
+/* Título */
+h1 {
+    text-align: center;
+
+    color: #b55b12;
+
+    font-size: 36px;
+
+    margin-bottom: 35px;
+}
+
+/* Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Textos */
+label {
+    color: #b55b12;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    margin-bottom: 8px;
+}
+
+/* Espacios para escribir */
+input {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-bottom: 20px;
+
+    background-color: #f6c8a2;
+
+    border: 2px solid transparent;
+    border-radius: 10px;
+
+    color: #87440d;
+
+    font-size: 15px;
+
+    outline: none;
+}
+
+/* Texto dentro de los inputs */
+input::placeholder {
+    color: #87440d;
+    opacity: 0.7;
+}
+
+/* Efecto al seleccionar un campo */
+input:focus {
+    border-color: #b55b12;
+}
+
+/* Botón principal */
+button {
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 10px;
+
+    background-color: #87440d;
+
+    color: white;
+
+    border: none;
+    border-radius: 10px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+/* Efecto al pasar el mouse */
+button:hover {
+    background-color: #b55b12;
+
+    transform: translateY(-2px);
+}
+
+/* Recuperar contraseña */
+.recuperar {
+    margin-top: 20px;
+
+    text-align: center;
+
+    color: #b55b12;
+
+    text-decoration: none;
+
+    font-size: 14px;
+}
+
+.recuperar:hover {
+    text-decoration: underline;
+}
