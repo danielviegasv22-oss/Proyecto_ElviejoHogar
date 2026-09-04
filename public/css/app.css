@@ -1,0 +1,299 @@
+﻿/* ==========================================================================
+   Configuracion Base y Estructura Pure CSS - El Viejo Hogar
+   ========================================================================== */
+
+:root {
+    --color-bg-main: #fae3d1;
+    --color-bg-light: #fdf1e8;
+    --color-header: #f6c8a2;
+    --color-card-bg: #f1ac74;
+    --color-primary: #87440d;
+    --color-secondary: #b55b12;
+    --color-text: #87440d;
+    --color-white: #ffffff;
+    
+    --shadow-soft: 0 4px 12px rgba(135, 68, 13, 0.15);
+    --shadow-card: 0 6px 15px rgba(135, 68, 13, 0.20);
+    --shadow-card-hover: 0 12px 25px rgba(135, 68, 13, 0.30);
+    
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-full: 50%;
+    
+    --font-main: Arial, sans-serif;
+    --font-title: "Times New Roman", Times, serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg-main);
+    font-family: var(--font-main);
+    color: var(--color-secondary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   Header y Navegacion
+   ========================================================================== */
+
+.header {
+    width: 100%;
+    height: 115px;
+    background-color: var(--color-header);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 35px;
+    box-shadow: var(--shadow-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    text-decoration: none;
+}
+
+.logo {
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    border-radius: var(--radius-full);
+}
+
+.logo-container h1 {
+    font-family: var(--font-title);
+    font-size: 32px;
+    color: var(--color-primary);
+    white-space: nowrap;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.carrito {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--radius-full);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.carrito:hover {
+    transform: scale(1.1);
+}
+
+.contador {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 22px;
+    height: 22px;
+    background-color: var(--color-secondary);
+    color: var(--color-white);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.perfil {
+    width: 60px;
+    height: 60px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary);
+    padding: 3px;
+    overflow: hidden;
+    border: 3px solid var(--color-primary);
+}
+
+.perfil img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+}
+
+/* ==========================================================================
+   Contenido Principal
+   ========================================================================== */
+
+.main-content {
+    flex: 1;
+    padding: 20px 0;
+}
+
+.titulo-seccion {
+    text-align: center;
+    margin: 35px 0 25px;
+    font-family: var(--font-title);
+    font-size: 36px;
+    color: var(--color-primary);
+}
+
+/* ==========================================================================
+   Grid y Cards de Productos
+   ========================================================================== */
+
+.menu {
+    width: 90%;
+    max-width: 1300px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding-bottom: 50px;
+}
+
+.card {
+    background-color: var(--color-card-bg);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card-hover);
+}
+
+.imagen-container {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background-color: var(--color-header);
+}
+
+.imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card:hover .imagen-container img {
+    transform: scale(1.06);
+}
+
+.card-content {
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card h3 {
+    color: var(--color-secondary);
+    font-family: var(--font-title);
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.descripcion {
+    color: var(--color-primary);
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 50px;
+    margin-bottom: 10px;
+}
+
+.precio {
+    color: var(--color-secondary);
+    font-size: 22px;
+    font-weight: bold;
+    margin: 10px 0 15px;
+}
+
+.btn-carrito {
+    margin-top: auto;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-md);
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-carrito:hover {
+    background-color: var(--color-secondary);
+    transform: scale(1.02);
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+    .menu {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    .menu {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .logo-container h1 {
+        font-size: 26px;
+    }
+    
+    .header {
+        padding: 10px 20px;
+    }
+}
+
+@media (max-width: 550px) {
+    .header {
+        height: auto;
+        padding: 15px;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+    
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .logo-container h1 {
+        font-size: 20px;
+    }
+    
+    .menu {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El viejo hogar</title>
+   <style>
+    /* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fae3d1;
+    font-family: Arial, sans-serif;
+    color: #b55b12;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    width: 100%;
+    height: 115px;
+
+    background-color: #f6c8a2;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 10px 35px;
+
+    box-shadow: 0 4px 12px rgba(135, 68, 13, 0.20);
+}
+
+
+/* LOGO + NOMBRE */
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.logo {
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    border-radius: 50%;
+}
+
+.logo-container h1 {
+    font-family: "Times New Roman", Times, serif;
+
+    font-size: 34px;
+
+    color: #87440d;
+
+    white-space: nowrap;
+}
+
+
+/* =========================
+   PARTE DERECHA HEADER
+========================= */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+
+/* CARRITO */
+
+.carrito {
+    position: relative;
+
+    width: 50px;
+    height: 50px;
+
+    background-color: #87440d;
+
+    color: white;
+
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.carrito:hover {
+    transform: scale(1.1);
+}
+
+
+/* CONTADOR */
+
+.contador {
+    position: absolute;
+
+    top: -5px;
+    right: -5px;
+
+    width: 22px;
+    height: 22px;
+
+    background-color: #b55b12;
+
+    color: white;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   PERFIL
+========================= */
+
+.perfil {
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
+
+    background-color: #87440d;
+
+    padding: 4px;
+
+    overflow: hidden;
+
+    border: 3px solid #87440d;
+}
+
+.perfil img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+}
+
+
+/* =========================
+   TITULO
+========================= */
+
+.titulo-menu {
+    text-align: center;
+
+    margin: 40px 0 30px;
+
+    font-family: "Times New Roman", Times, serif;
+
+    font-size: 36px;
+
+    color: #87440d;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.menu {
+
+    width: 90%;
+
+    max-width: 1400px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 30px;
+
+    padding-bottom: 50px;
+}
+
+
+/* =========================
+   CARDS
+========================= */
+
+.card {
+
+    background-color: #f1ac74;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 6px 15px
+        rgba(135, 68, 13, 0.20);
+
+    transition:
+        transform 0.3s,
+        box-shadow 0.3s;
+}
+
+.card:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 12px 25px
+        rgba(135, 68, 13, 0.30);
+}
+
+
+/* =========================
+   IMAGEN
+========================= */
+
+.imagen-container {
+
+    width: 100%;
+    height: 210px;
+
+    overflow: hidden;
+
+    background-color: #f6c8a2;
+}
+
+.imagen-container img {
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.4s;
+}
+
+.card:hover .imagen-container img {
+
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   CONTENIDO CARD
+========================= */
+
+.card-content {
+
+    padding: 20px;
+
+    text-align: center;
+}
+
+
+/* NOMBRE */
+
+.card h3 {
+
+    color: #b55b12;
+
+    font-family:
+        "Times New Roman",
+        Times,
+        serif;
+
+    font-size: 25px;
+
+    margin-bottom: 10px;
+}
+
+
+/* DESCRIPCIÓN */
+
+.descripcion {
+
+    color: #87440d;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    min-height: 63px;
+
+    margin-bottom: 10px;
+}
+
+
+/* PRECIO */
+
+.precio {
+
+    color: #b55b12;
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    margin: 12px 0 18px;
+}
+
+
+/* =========================
+   BOTÓN
+========================= */
+
+.btn-carrito {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background-color: #87440d;
+
+    color: white;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.3s,
+        transform 0.2s;
+}
+
+.btn-carrito:hover {
+
+    background-color: #b55b12;
+
+    transform: scale(1.03);
+}
+
+.btn-carrito:active {
+
+    transform: scale(0.97);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 1100px) {
+
+    .menu {
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+/* =========================
+   TABLET PEQUEÑA
+========================= */
+
+@media (max-width: 800px) {
+
+    .menu {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .logo-container h1 {
+        font-size: 27px;
+    }
+
+    .header {
+        padding: 10px 20px;
+    }
+
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media (max-width: 550px) {
+
+    .header {
+        height: auto;
+
+        padding: 15px;
+
+        gap: 15px;
+    }
+
+    .logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .logo-container {
+        gap: 8px;
+    }
+
+    .logo-container h1 {
+        font-size: 22px;
+    }
+
+    .header-right {
+        gap: 10px;
+    }
+
+    .perfil {
+        width: 50px;
+        height: 50px;
+    }
+
+    .carrito {
+        width: 42px;
+        height: 42px;
+    }
+
+    .titulo-menu {
+        font-size: 30px;
+    }
+
+    .menu {
+        width: 90%;
+
+        grid-template-columns:
+            1fr;
+
+        gap: 25px;
+    }
+
+}
+   </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="logo-container">
+            <img src="Logo 500x500 px.jpeg"
+                 alt="Logo El viejo hogar"
+                 class="logo">
+
+            <h1>El viejo hogar</h1>
+        </div>
+
+        <div class="header-right">
+
+            <div class="carrito">
+                🛒
+                <span class="contador">0</span>
+            </div>
+
+            <div class="perfil">
+                <img src="images (1).jpg" alt="Foto de perfil">
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- CONTENIDO -->
+    <main>
+
+        <h2 class="titulo-menu">Nuestro menú</h2>
+
+        <section class="menu">
+
+
+            <!-- CARD 1 -->
+            <article class="card">
+
+                <div class="imagen-container">
+                    <img src="imagenes/pollo.jpg"
+                         alt="Pollo al horno">
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Pollo al horno</h3>
+
+                    <p class="descripcion">
+                        Pollo dorado al horno acompañado con papas
+                        y verduras de estación.
+                    </p>
+
+                    <p class="precio">$8.500</p>
+
+                    <button class="btn-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+            <article class="card">
+
+                <div class="imagen-container">
+                    <img src="imagenes/pasta.jpg"
+                         alt="Pasta casera">
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Pasta casera</h3>
+
+                    <p class="descripcion">
+                        Pasta artesanal acompañada con salsa de tomate
+                        y queso rallado.
+                    </p>
+
+                    <p class="precio">$7.200</p>
+
+                    <button class="btn-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+            <article class="card">
+
+                <div class="imagen-container">
+                    <img src="imagenes/asado.jpg"
+                         alt="Asado tradicional">
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Asado tradicional</h3>
+
+                    <p class="descripcion">
+                        Corte de carne a la parrilla acompañado
+                        de papas rústicas.
+                    </p>
+
+                    <p class="precio">$12.500</p>
+
+                    <button class="btn-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 4 -->
+            <article class="card">
+
+                <div class="imagen-container">
+                    <img src="imagenes/milanesa.jpg"
+                         alt="Milanesa con papas">
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Milanesa con papas</h3>
+
+                    <p class="descripcion">
+                        Milanesa casera acompañada con papas fritas
+                        crocantes.
+                    </p>
+
+                    <p class="precio">$7.800</p>
+
+                    <button class="btn-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 5 -->
+            <article class="card">
+
+                <div class="imagen-container">
+                    <img src="imagenes/empanadas.jpg"
+                         alt="Empanadas caseras">
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Empanadas caseras</h3>
+
+                    <p class="descripcion">
+                        Empanadas artesanales rellenas de carne,
+                        cebolla y especias.
+                    </p>
+
+                    <p class="precio">$5.500</p>
+
+                    <button class="btn-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 6 -->
+            <article class="card">
+
+                <div class="imagen-container">
+                    <img src="imagenes/estofado.jpg"
+                         alt="Estofado de carne">
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Estofado de carne</h3>
+
+                    <p class="descripcion">
+                        Carne cocida lentamente con verduras
+                        y salsa de la casa.
+                    </p>
+
+                    <p class="precio">$9.300</p>
+
+                    <button class="btn-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 7 -->
+            <article class="card">
+
+                <div class="imagen-container">
+                    <img src="imagenes/ravioles.jpg"
+                         alt="Ravioles">
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Ravioles de la casa</h3>
+
+                    <p class="descripcion">
+                        Ravioles rellenos con carne y queso
+                        acompañados con salsa casera.
+                    </p>
+
+                    <p class="precio">$8.900</p>
+
+                    <button class="btn-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+
+            <!-- CARD 8 -->
+            <article class="card">
+
+                <div class="imagen-container">
+                    <img src="imagenes/postre.jpg"
+                         alt="Postre de la casa">
+                </div>
+
+                <div class="card-content">
+
+                    <h3>Postre de la casa</h3>
+
+                    <p class="descripcion">
+                        Delicioso postre casero perfecto para
+                        terminar la comida.
+                    </p>
+
+                    <p class="precio">$4.500</p>
+
+                    <button class="btn-carrito">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+
+            </article>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+        let cantidad = 0;
+
+        const botones = document.querySelectorAll(".btn-carrito");
+        const contador = document.querySelector(".contador");
+
+        botones.forEach(boton => {
+
+            boton.addEventListener("click", () => {
+
+                cantidad++;
+
+                contador.textContent = cantidad;
+
+                boton.textContent = "¡Añadido!";
+
+                setTimeout(() => {
+                    boton.textContent = "Añadir al carrito";
+                }, 1000);
+
+            });
+
+        });
+
+    </script>
+
+</body>
+</html>
