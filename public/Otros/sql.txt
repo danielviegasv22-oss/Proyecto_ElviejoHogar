@@ -1,0 +1,312 @@
+-- =========================================================
+-- CREACIÓN DE LA BASE DE DATOS
+-- =========================================================
+
+CREATE DATABASE IF NOT EXISTS emprendimiento;
+USE emprendimiento;
+
+
+-- =========================================================
+-- 1. TIPOS DE PEDIDOS
+-- =========================================================
+
+CREATE TABLE Tipos_de_pedidos (
+    id_tipo_pedidos INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL
+);
+
+
+-- =========================================================
+-- 2. TIPO DE PROVEEDOR
+-- =========================================================
+
+CREATE TABLE Tipo_proveedor (
+    ID_Tipo INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL
+);
+
+
+-- =========================================================
+-- 3. INGREDIENTES
+-- =========================================================
+
+CREATE TABLE Ingredientes (
+    ID_Ingredientes INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Cantidad_ingr DECIMAL(10,2),
+    Precio_ingr DECIMAL(10,2)
+);
+
+
+-- =========================================================
+-- 4. PROVEEDORES
+-- =========================================================
+
+CREATE TABLE Proveedores (
+    ID_Proveedor INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Numero_Tele VARCHAR(50),
+    domicilio VARCHAR(255),
+    ID_Tipo INT,
+
+    CONSTRAINT FK_Proveedor_Tipo
+        FOREIGN KEY (ID_Tipo)
+        REFERENCES Tipo_proveedor(ID_Tipo)
+);
+
+
+-- =========================================================
+-- 5. INGREDIENTES - PROVEEDORES
+-- =========================================================
+
+CREATE TABLE Ingredientes_proveedores (
+    ID_ingredientes_proveedores INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Proveedor INT NOT NULL,
+    ID_Ingredientes INT NOT NULL,
+
+    CONSTRAINT FK_IP_Proveedor
+        FOREIGN KEY (ID_Proveedor)
+        REFERENCES Proveedores(ID_Proveedor),
+
+    CONSTRAINT FK_IP_Ingrediente
+        FOREIGN KEY (ID_Ingredientes)
+        REFERENCES Ingredientes(ID_Ingredientes),
+
+    UNIQUE (ID_Proveedor, ID_Ingredientes)
+);
+
+
+-- =========================================================
+-- 6. REPARTIDORES
+-- =========================================================
+
+CREATE TABLE Repartidores (
+    ID_Repartidor INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre_Repartidor VARCHAR(100) NOT NULL,
+    Apellido VARCHAR(100),
+    Edad INT,
+    Localidad VARCHAR(100),
+    Vehiculo VARCHAR(100),
+    Avatar VARCHAR(255),
+    Repartidores_local INT
+);
+
+
+-- =========================================================
+-- 7. LOCALES
+-- =========================================================
+
+CREATE TABLE Locales (
+    ID_local INT AUTO_INCREMENT PRIMARY KEY,
+    Ubicacion VARCHAR(255),
+    Horarios VARCHAR(255),
+    Repartidores_local INT,
+    ID_menu INT
+);
+
+
+-- =========================================================
+-- 8. MENÚ
+-- =========================================================
+
+CREATE TABLE Menu (
+    ID_Menu INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre_M VARCHAR(100) NOT NULL,
+    ID_Comidas INT
+);
+
+
+-- =========================================================
+-- 9. COMIDA
+-- =========================================================
+
+CREATE TABLE Comida (
+    ID_Comidas INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Precio DECIMAL(10,2) NOT NULL,
+    ID_Menu INT
+);
+
+
+-- =========================================================
+-- RELACIÓN MENU - COMIDA
+-- =========================================================
+
+ALTER TABLE Menu
+ADD CONSTRAINT FK_Menu_Comida
+FOREIGN KEY (ID_Comidas)
+REFERENCES Comida(ID_Comidas);
+
+ALTER TABLE Comida
+ADD CONSTRAINT FK_Comida_Menu
+FOREIGN KEY (ID_Menu)
+REFERENCES Menu(ID_Menu);
+
+
+-- =========================================================
+-- 10. LOCALES - MENÚ
+-- =========================================================
+
+CREATE TABLE Locales_Menu (
+    ID_Locales_Menu INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Menu INT NOT NULL,
+    ID_local INT NOT NULL,
+
+    CONSTRAINT FK_LM_Menu
+        FOREIGN KEY (ID_Menu)
+        REFERENCES Menu(ID_Menu),
+
+    CONSTRAINT FK_LM_Local
+        FOREIGN KEY (ID_local)
+        REFERENCES Locales(ID_local),
+
+    UNIQUE (ID_Menu, ID_local)
+);
+
+
+-- =========================================================
+-- 11. INGREDIENTES - COMIDAS
+-- =========================================================
+
+CREATE TABLE Ingredientes_comidas (
+    ID_ingredientes_comida INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Ingredientes INT NOT NULL,
+    ID_Comidas INT NOT NULL,
+
+    CONSTRAINT FK_IC_Ingrediente
+        FOREIGN KEY (ID_Ingredientes)
+        REFERENCES Ingredientes(ID_Ingredientes),
+
+    CONSTRAINT FK_IC_Comida
+        FOREIGN KEY (ID_Comidas)
+        REFERENCES Comida(ID_Comidas),
+
+    UNIQUE (ID_Ingredientes, ID_Comidas)
+);
+
+
+-- =========================================================
+-- 12. PROMOCIONES
+-- =========================================================
+
+CREATE TABLE Promociones (
+    id_Promociones INT AUTO_INCREMENT PRIMARY KEY,
+    Cant_Creditos INT DEFAULT 0,
+    ID_Menu INT,
+
+    CONSTRAINT FK_Promocion_Menu
+        FOREIGN KEY (ID_Menu)
+        REFERENCES Menu(ID_Menu)
+);
+
+
+-- =========================================================
+-- 13. COMIDA - PROMOCIONES
+-- =========================================================
+
+CREATE TABLE Comida_Promociones (
+    ID_Comida_Promociones INT AUTO_INCREMENT PRIMARY KEY,
+    ID_Comidas INT NOT NULL,
+    ID_Promociones INT NOT NULL,
+
+    CONSTRAINT FK_CP_Comida
+        FOREIGN KEY (ID_Comidas)
+        REFERENCES Comida(ID_Comidas),
+
+    CONSTRAINT FK_CP_Promocion
+        FOREIGN KEY (ID_Promociones)
+        REFERENCES Promociones(id_Promociones),
+
+    UNIQUE (ID_Comidas, ID_Promociones)
+);
+
+
+-- =========================================================
+-- 14. USUARIO
+-- =========================================================
+
+CREATE TABLE Usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Correo_electronico VARCHAR(150) NOT NULL,
+    ID_Favoritos INT,
+    Cant_Creditos INT DEFAULT 0,
+
+    UNIQUE (Correo_electronico)
+);
+
+
+-- =========================================================
+-- 15. MENÚ - USUARIO
+-- =========================================================
+
+CREATE TABLE Menu_Usuario (
+    IDPromociones_Usuario INT AUTO_INCREMENT PRIMARY KEY,
+    Favoritos INT,
+    ID_usuario INT NOT NULL,
+
+    CONSTRAINT FK_MU_Usuario
+        FOREIGN KEY (ID_usuario)
+        REFERENCES Usuario(id_usuario),
+
+    CONSTRAINT FK_MU_Menu
+        FOREIGN KEY (Favoritos)
+        REFERENCES Menu(ID_Menu)
+);
+
+
+-- =========================================================
+-- RELACIÓN USUARIO - FAVORITOS
+-- =========================================================
+
+ALTER TABLE Usuario
+ADD CONSTRAINT FK_Usuario_Favoritos
+FOREIGN KEY (ID_Favoritos)
+REFERENCES Menu_Usuario(IDPromociones_Usuario);
+
+
+-- =========================================================
+-- RELACIONES DE LOCALES Y REPARTIDORES
+-- =========================================================
+
+ALTER TABLE Locales
+ADD CONSTRAINT FK_Local_Repartidor
+FOREIGN KEY (Repartidores_local)
+REFERENCES Repartidores(ID_Repartidor);
+
+ALTER TABLE Locales
+ADD CONSTRAINT FK_Local_Menu
+FOREIGN KEY (ID_menu)
+REFERENCES Menu(ID_Menu);
+
+ALTER TABLE Repartidores
+ADD CONSTRAINT FK_Repartidor_Local
+FOREIGN KEY (Repartidores_local)
+REFERENCES Locales(ID_local);
+
+
+-- =========================================================
+-- 16. PEDIDOS
+-- =========================================================
+
+CREATE TABLE Pedidos (
+    id_pedidos INT AUTO_INCREMENT PRIMARY KEY,
+    Precio_Integral_Final DECIMAL(10,2),
+    Lugar_llegada VARCHAR(255),
+    Lugar_Salida VARCHAR(255),
+    Nombre_Repartidor INT,
+    id_Tipo_pedidos INT,
+    id_comidas INT,
+
+    CONSTRAINT FK_Pedido_Repartidor
+        FOREIGN KEY (Nombre_Repartidor)
+        REFERENCES Repartidores(ID_Repartidor),
+
+    CONSTRAINT FK_Pedido_Tipo
+        FOREIGN KEY (id_Tipo_pedidos)
+        REFERENCES Tipos_de_pedidos(id_tipo_pedidos),
+
+    CONSTRAINT FK_Pedido_Comida
+        FOREIGN KEY (id_comidas)
+        REFERENCES Comida(ID_Comidas)
+);
