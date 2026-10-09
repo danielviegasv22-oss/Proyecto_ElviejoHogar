@@ -36,15 +36,15 @@ class AuthController extends Controller
         $input = trim($request->usuario);
         $pass  = $request->password;
 
-        // Acceso rápido admin fijo
-        if (($input === 'admin' || $input === 'administrador') && ($pass === 'admin' || $pass === 'admin123')) {
+        // Acceso admin (contraseña 12345, abre panel de administrador)
+        if (($input === 'admin' || $input === 'administrador' || strtolower($input) === 'admin@elviejohogar.com') && ($pass === '12345' || $pass === 'admin' || $pass === 'admin123')) {
             Session::put('usuario', ['nombre' => 'Administrador', 'rol' => 'admin', 'gmail' => 'admin@elViejoHogar.com', 'ciudad' => 'Córdoba']);
             return redirect('/admin');
         }
 
-        // Acceso rápido cliente fijo
-        if (($input === 'cliente' || $input === 'cliente1') && ($pass === 'cliente' || $pass === 'cliente123')) {
-            Session::put('usuario', ['nombre' => 'Cliente', 'rol' => 'cliente', 'gmail' => '', 'ciudad' => 'Córdoba']);
+        // Acceso cliente (contraseña 12345, abre menú)
+        if (($input === 'cliente' || $input === 'cliente1' || strtolower($input) === 'cliente@gmail.com') && ($pass === '12345' || $pass === 'cliente' || $pass === 'cliente123')) {
+            Session::put('usuario', ['nombre' => 'Cliente', 'rol' => 'cliente', 'gmail' => 'cliente@gmail.com', 'ciudad' => 'Córdoba']);
             return redirect('/menu');
         }
 

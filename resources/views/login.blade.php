@@ -71,8 +71,8 @@
         </div>
 
         <div class="credential-tip">
-            <div>👑 <strong>Admin:</strong> usuario: <code>admin</code> | pass: <code>admin</code></div>
-            <div style="margin-top:3px">👤 <strong>Cliente:</strong> usuario: <code>cliente</code> | pass: <code>cliente</code></div>
+            <div>👑 <strong>Admin:</strong> usuario: <code>admin</code> | pass: <code>12345</code> (abre panel de administrador)</div>
+            <div style="margin-top:3px">👤 <strong>Cliente:</strong> usuario: <code>cliente</code> | pass: <code>12345</code> (abre menú de pedidos)</div>
         </div>
 
         @if(isset($errors) && $errors->has('error'))
@@ -98,28 +98,7 @@
             <button type="submit" class="btn-submit" id="btn-login-submit">Ingresar al sistema</button>
         </form>
 
-        <div class="divider"><span>O acceso rápido (1 Clic)</span></div>
 
-        <div class="quick-access-grid">
-            <form method="POST" action="/login">
-                @csrf
-                <input type="hidden" name="usuario" value="admin">
-                <input type="hidden" name="password" value="admin">
-                <button type="submit" class="btn-quick btn-quick-admin" id="btnQuickAdmin" style="width:100%">
-                    <span>👑 Administrador</span>
-                    <small style="opacity:0.9;font-size:11px">(Editar Menú)</small>
-                </button>
-            </form>
-            <form method="POST" action="/login">
-                @csrf
-                <input type="hidden" name="usuario" value="cliente">
-                <input type="hidden" name="password" value="cliente">
-                <button type="submit" class="btn-quick btn-quick-client" id="btnQuickClient" style="width:100%">
-                    <span>👤 Cliente</span>
-                    <small style="opacity:0.9;font-size:11px">(Ver Menú y Pedidos)</small>
-                </button>
-            </form>
-        </div>
 
         <div class="login-footer-links">
             <div>¿No tienes cuenta? <a href="/registro" id="link-registro">Crear una cuenta</a></div>
